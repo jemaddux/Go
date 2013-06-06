@@ -31,12 +31,8 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
   if err != nil {
     p = &Page{Title: title}
   }
-  fmt.Fprintf(w, "<h1>Editing %s</h1>"+
-    "<form action=\"/save/%s\" method=\"POST\">"+
-    "<textarea name=\"body\">%s</textarea><br>"+
-    "<input type=\"submit\" vale=\"Save\">"+
-    "</form>",
-    p.Title, p.Title, p.Body)
+  t, _ := template.ParseFiles("edit.html")
+  t.Execute(w, p)
 }
 
 const lenPath = len("/view/")
